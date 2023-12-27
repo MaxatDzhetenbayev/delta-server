@@ -2,6 +2,7 @@ import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import {InjectModel} from '@nestjs/sequelize'
 import { Cards } from './cards.model';
 import { CardUpdateDto, cardsCreateDto } from './cards.controller';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class CardsService {
@@ -30,10 +31,19 @@ export class CardsService {
         }
     }
 
-    async getAllCards(){
+    async getAllCards(question: string){
+
+        const whereCondition:any = {};
+
+
+        if (question) {
+            // Добавление условия LIKE, если question передан
+            whereCondition.question = { [Op.like]: `%${question}%` };
+        }
+
         try {
 
-            const cards = await this.cardsRepository.findAll()
+            const cards = await this.cardsRepository.findAll({where: whereCondition})
 
             if(!cards){
                 throw new HttpException(

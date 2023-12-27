@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Body, Delete, Param, Put } from '@nestjs/common';
+import { Controller, Post, Get, Body, Delete, Param, Put, Query } from '@nestjs/common';
 import { CardsService } from './cards.service';
 
 
@@ -23,8 +23,8 @@ export class CardsController {
  
 
     @Get()
-    getAll(){
-        return this.cardsService.getAllCards()
+    getAll(@Query('question') question?: string){
+        return this.cardsService.getAllCards(question)
     }
 
     @Delete(':id')
