@@ -23,8 +23,8 @@ export class CardsController {
  
 
     @Get()
-    getAll(@Query('question') question?: string){
-        return this.cardsService.getAllCards(question)
+    getAll(@Query('question') question?: string, @Query('tag') tag?: string){
+        return this.cardsService.getAllCards(question, tag)
     }
 
     @Delete(':id')
