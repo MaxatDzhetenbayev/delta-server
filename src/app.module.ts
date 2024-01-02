@@ -6,6 +6,8 @@ import { CardsModule } from './cards/cards.module';
 import { Cards } from './cards/cards.model';
 import { TagsModule } from './tags/tags.module';
 import { Tags } from './tags/tags.model';
+import { UsersModule } from './users/users.module';
+import { Users } from './users/users.model';
 
 @Module({
   imports: [
@@ -16,10 +18,11 @@ import { Tags } from './tags/tags.model';
       username: 'postgres',
       password: 'admin',
       database: 'delta',
-      models: [Cards, Tags],
+      models: [Cards, Tags, Users],
     }),
     CardsModule,
     TagsModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
