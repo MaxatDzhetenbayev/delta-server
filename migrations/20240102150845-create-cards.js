@@ -7,23 +7,29 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       question: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       answer: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+      },
+      userId: {
+        type: Sequelize.DataTypes.INTEGER,
+        references: { model: 'users', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       tagId: {
         type: Sequelize.INTEGER,
         references: { model: 'tags', key: 'id' },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
-      }
+        onDelete: 'SET NULL',
+      },
     });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('cards');
-  }
+  },
 };
