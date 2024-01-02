@@ -8,9 +8,12 @@ import {
 } from 'sequelize-typescript';
 import { Tags } from '../tags/tags.model';
 import { Users } from 'src/users/users.model';
+
 interface CardsCreationAttrs {
   question: string;
   answer: string;
+  tagId: number;
+  userId: number;
 }
 
 @Table({ tableName: 'cards', timestamps: false })
@@ -29,6 +32,7 @@ export class Cards extends Model<Cards, CardsCreationAttrs> {
   tagId: number;
 
   @ForeignKey(() => Users)
+  @Column
   userId: number;
 
   @BelongsTo(() => Tags)

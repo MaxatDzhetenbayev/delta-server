@@ -56,4 +56,21 @@ export class UsersService {
       throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
+
+  async findUserById(userId: number) {
+    try {
+      const findedUser = await this.userRepository.findByPk(userId);
+
+      if (!findedUser)
+        throw new HttpException(
+          'Такого пользователя не существует',
+          HttpStatus.BAD_REQUEST,
+        );
+
+      return true;
+    } catch (error) {
+      console.log(error);
+      throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
 }
