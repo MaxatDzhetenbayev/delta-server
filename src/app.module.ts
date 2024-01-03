@@ -8,6 +8,7 @@ import { TagsModule } from './tags/tags.module';
 import { Tags } from './tags/tags.model';
 import { UsersModule } from './users/users.module';
 import { Users } from './users/users.model';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { Users } from './users/users.model';
     CardsModule,
     TagsModule,
     UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

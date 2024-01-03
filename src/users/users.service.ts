@@ -73,4 +73,22 @@ export class UsersService {
       throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
+
+  async userValidation({username, password}: userCreateDto){
+      const findedUser = await this.findUserByName(username)
+
+    if(!findedUser.success)  throw new HttpException(
+      'Неправильный логин или пароль',
+      HttpStatus.BAD_REQUEST,
+    );
+
+      try {
+          if(!bcrypt.compareSync(password, findedUser.data.passwordhash))   return {success: false}
+
+          return {success: true, data: findedUser}
+      } catch (error) {
+        console.log(error);
+        throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
+      }
+  }
 }
