@@ -17,15 +17,10 @@ export class AuthController {
 
     }
 
+    
     @Post('login')
-    async login(@Body() loginDto: userCreateDto, @Response({passthrough: true}) res){
-
+    async login(@Body() loginDto: userCreateDto){
         const userData =  await this.authService.login(loginDto)
-        res.cookie('token', userData.data.passwordhash, {
-            httpOnly: true,
-            secure: false,
-            maxAge: 1 * 60 * 60 * 1000,
-          });
         return userData
     }
 
